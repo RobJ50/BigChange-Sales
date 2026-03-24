@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BigChange | One Platform. Every Job. Total Control.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<style>
+  :root {
+    --bc-green: #009FE3;          /* BigChange Energy Blue — primary brand */
+    --bc-green-dark: #0077B6;     /* Deeper blue for hover states */
+    --bc-lime: #38C7F5;           /* Lighter electric blue for highlights */
+    --bc-dark: #090E1A;           /* Near-black navy — page background */
+    --bc-dark2: #0D1525;          /* Slightly lighter navy — alternate sections */
+    --bc-card: #111E33;           /* Card / surface background */
+    --bc-border: #1A2D4A;         /* Subtle border */
+    --bc-mid: #1E3A5F;            /* Mid-tone blue for dividers, inactive states */
+    --bc-muted: #5E87AD;          /* Muted blue-grey for secondary text */
+    --bc-light: #B3D9F0;          /* Light blue for body text on dark */
+    --bc-white: #F0F8FF;          /* Off-white with a blue tint */
+    --bc-accent: #FF6B35;         /* Orange accent — CTAs, pain icons */
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bc-dark);
+    color: var(--bc-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+
+  /* ── Inline SVG logos ── */
+  .inline-logo { display: inline-flex; align-items: center; }
+  .inline-logo svg { display: block; }
+  .logo-bar .inline-logo svg { height: 28px; width: auto; opacity: 0.55; transition: opacity 0.2s; filter: grayscale(1); }
+  .logo-bar .inline-logo:hover svg { opacity: 1; filter: grayscale(0); }
+  .award-logo svg { height: 48px; width: auto; }
+
+
+  /* ── Simpro-style cost callout ── */
+  .cost-callout {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-bottom: 48px;
+    background: var(--bc-dark2);
+    border: 1px solid var(--bc-border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .cost-stat {
+    padding: 36px 32px;
+    background: var(--bc-card);
+    border-right: 1px solid var(--bc-border);
+  }
+  .cost-stat:last-child { border-right: none; }
+  .cost-stat.highlight { background: rgba(0,159,227,0.06); }
+  .cost-num {
+    font-size: clamp(42px, 4.5vw, 64px);
+    font-weight: 900;
+    color: var(--bc-accent);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+  .cost-stat.highlight .cost-num { color: var(--bc-green); }
+  .cost-desc {
+    font-size: 13px;
+    color: var(--bc-muted);
+    line-height: 1.5;
+  }
+
+
+  /* ── Comparison table ── */
+  .comparison-table {
+    margin-top: 64px;
+  }
+  .comp-header { margin-bottom: 24px; }
+  .comp-header p { color: var(--bc-muted); font-size: 15px; margin-top: 8px; }
+  .comp-grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .comp-grid th, .comp-grid td {
+    padding: 12px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--bc-border);
+  }
+  .comp-grid thead th {
+    background: var(--bc-dark);
+    color: var(--bc-muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .comp-grid thead th.with { color: var(--bc-green); }
+  .comp-grid tbody tr { background: var(--bc-card); }
+  .comp-grid tbody tr:nth-child(even) { background: rgba(17,30,51,0.6); }
+  .comp-grid tbody tr:hover { background: rgba(0,159,227,0.04); }
+  .comp-grid tbody td:first-child { color: var(--bc-white); font-weight: 600; }
+  .comp-grid td.without { color: var(--bc-muted); font-size: 12px; }
+  .comp-grid td.with { color: var(--bc-green); font-weight: 700; font-size: 13px; white-space: nowrap; }
+  .comp-footer {
+    background: var(--bc-dark2) !important;
+    color: var(--bc-muted);
+    font-size: 12px;
+    padding: 16px 18px !important;
+    border-bottom: none !important;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 48px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 1px 16px rgba(0,0,0,0.07);
+  }
+  nav img { height: 38px; }
+  .nav-cta {
+    background: var(--bc-green);
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--bc-green-dark); }
+
+  /* ── SECTIONS ── */
+  section { position: relative; }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 48px;
+  }
+
+  .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bc-green);
+    margin-bottom: 16px;
+    display: inline-block;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Inter', sans-serif; line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--bc-dark);
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,159,227,0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(56,199,245,0.06) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    padding-top: 100px;
+  }
+
+  .hero-kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bc-green);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: clamp(48px, 6vw, 84px);
+    font-weight: 900;
+    line-height: 0.96;
+    color: var(--bc-white);
+    margin-bottom: 28px;
+    letter-spacing: -0.03em;
+  }
+
+  h1 span.accent { color: var(--bc-green); }
+  h1 span.accent2 { color: var(--bc-lime); }
+
+  .hero-sub {
+    font-size: 19px;
+    font-weight: 300;
+    color: var(--bc-light);
+    opacity: 0.85;
+    max-width: 480px;
+    margin-bottom: 44px;
+    line-height: 1.65;
+  }
+
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--bc-green);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 16px 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--bc-green-dark); transform: translateY(-1px); }
+
+  .btn-ghost {
+    border: 1px solid var(--bc-mid);
+    color: var(--bc-white);
+    font-weight: 500;
+    font-size: 15px;
+    padding: 16px 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--bc-green); background: rgba(0,159,227,0.08); }
+
+  .hero-stat-row {
+    display: flex;
+    gap: 40px;
+    margin-top: 52px;
+    padding-top: 40px;
+    border-top: 1px solid var(--bc-border);
+  }
+  .hero-stat {}
+  .hero-stat .num {
+    font-family: 'Inter', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--bc-green);
+    line-height: 1;
+  }
+  .hero-stat .desc {
+    font-size: 13px;
+    color: var(--bc-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 4px;
+  }
+
+  /* hero right - image with overlay callouts */
+  .hero-visual {
+    position: relative;
+  }
+  .hero-img-wrap {
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-img-wrap img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.7) saturate(0.9);
+  }
+  .hero-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,159,227,0.15) 0%, transparent 60%);
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: 28px;
+    left: 28px;
+    background: rgba(10,15,13,0.9);
+    border: 1px solid var(--bc-border);
+    border-radius: 8px;
+    padding: 16px 22px;
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-badge .icon-wrap {
+    width: 44px; height: 44px;
+    background: rgba(0,159,227,0.15);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--bc-green);
+  }
+  .hero-badge .badge-num { font-family: 'Inter', sans-serif; font-size: 28px; color: var(--bc-green); line-height: 1; }
+  .hero-badge .badge-desc { font-size: 12px; color: var(--bc-muted); text-transform: none; letter-spacing: 0; }
+
+  /* ── PAIN SECTION ── */
+  #pain {
+    background: var(--bc-dark2);
+    border-top: 1px solid var(--bc-border);
+    border-bottom: 1px solid var(--bc-border);
+  }
+
+  .pain-header { text-align: center; max-width: 680px; margin: 0 auto 72px; }
+  .pain-header h2 { font-size: clamp(36px, 4.2vw, 58px); font-weight: 900; margin-bottom: 20px; letter-spacing: -0.025em; }
+  .pain-header p { font-size: 18px; color: var(--bc-muted); line-height: 1.65; }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .pain-item {
+    background: var(--bc-card);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s;
+  }
+  .pain-item:hover { background: rgba(20,28,22,0.98); }
+  .pain-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.25s;
+  }
+  .pain-item:hover::before { background: var(--bc-green); }
+
+  .pain-icon {
+    font-size: 32px;
+    color: var(--bc-accent);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .pain-item h3 { font-size: 22px; color: var(--bc-white); margin-bottom: 12px; font-family: 'Inter', sans-serif; font-weight: 700; }
+  .pain-item p { font-size: 14px; color: var(--bc-muted); line-height: 1.65; }
+
+  .pain-solve {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--bc-green);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--bc-border);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pain-solve .material-icons-round { font-size: 14px; }
+
+  /* ── OUTCOMES / BIG NUMBERS ── */
+  #outcomes {
+    background: var(--bc-dark);
+  }
+
+  .outcomes-header { text-align: center; max-width: 640px; margin: 0 auto 80px; }
+  .outcomes-header h2 { font-size: clamp(36px, 4.2vw, 58px); font-weight: 900; margin-bottom: 20px; letter-spacing: -0.025em; }
+  .outcomes-header p { font-size: 18px; color: var(--bc-muted); }
+
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    margin-bottom: 72px;
+  }
+
+  .outcome-card {
+    background: var(--bc-card);
+    padding: 52px 48px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .outcome-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(0,159,227,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .outcome-num {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(52px, 5vw, 80px);
+    font-weight: 800;
+    line-height: 0.9;
+    color: var(--bc-green);
+    flex-shrink: 0;
+    min-width: 160px;
+  }
+
+  .outcome-body {}
+  .outcome-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--bc-white);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .outcome-desc { font-size: 14px; color: var(--bc-muted); line-height: 1.65; }
+  .outcome-source {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--bc-mid);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 14px;
+  }
+
+  .outcomes-cta-strip {
+    background: linear-gradient(90deg, rgba(0,159,227,0.12) 0%, rgba(56,199,245,0.06) 100%);
+    border: 1px solid rgba(0,159,227,0.2);
+    border-radius: 8px;
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .outcomes-cta-strip h3 {
+    font-size: clamp(22px, 2.5vw, 34px);
+    font-weight: 700;
+    color: var(--bc-white);
+    font-family: 'Inter', sans-serif;
+  }
+  .outcomes-cta-strip p { font-size: 15px; color: var(--bc-muted); max-width: 440px; margin-top: 6px; }
+
+  /* ── PLATFORM ── */
+  #platform {
+    background: var(--bc-dark2);
+    border-top: 1px solid var(--bc-border);
+  }
+
+  .platform-header { margin-bottom: 72px; }
+  .platform-header h2 { font-size: clamp(34px, 4vw, 52px); font-weight: 800; margin-bottom: 20px; max-width: 700px; }
+  .platform-header p { font-size: 18px; color: var(--bc-muted); max-width: 560px; line-height: 1.65; }
+
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    margin-bottom: 64px;
+  }
+
+  .platform-tile {
+    background: var(--bc-card);
+    padding: 36px 28px;
+    border-top: 2px solid transparent;
+    transition: border-color 0.25s, background 0.25s;
+    cursor: default;
+  }
+  .platform-tile:hover { border-top-color: var(--bc-green); background: rgba(0,159,227,0.03); }
+
+  .tile-icon {
+    width: 48px; height: 48px;
+    background: rgba(0,159,227,0.1);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--bc-green);
+    margin-bottom: 20px;
+  }
+  .tile-icon .material-icons-round { font-size: 24px; }
+
+  .platform-tile h4 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px; color: var(--bc-white); margin-bottom: 10px; }
+  .platform-tile p { font-size: 13px; color: var(--bc-muted); line-height: 1.6; }
+
+  .platform-value-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .platform-value-block {
+    background: var(--bc-card);
+    padding: 48px;
+  }
+
+  .platform-value-block h3 {
+    font-size: 26px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: var(--bc-white);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .platform-value-block .val-list { list-style: none; }
+  .platform-value-block .val-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--bc-border);
+    font-size: 14px;
+    color: var(--bc-muted);
+    line-height: 1.5;
+  }
+  .platform-value-block .val-list li:last-child { border-bottom: none; }
+  .platform-value-block .val-list li .material-icons-round { font-size: 18px; color: var(--bc-green); flex-shrink: 0; margin-top: 1px; }
+
+  /* ── WORKFLOW ── */
+  #workflow {
+    background: var(--bc-dark);
+    overflow: hidden;
+  }
+
+  .workflow-header { text-align: center; max-width: 640px; margin: 0 auto 72px; }
+  .workflow-header h2 { font-size: clamp(36px, 4.2vw, 58px); font-weight: 900; margin-bottom: 20px; letter-spacing: -0.025em; }
+  .workflow-header p { font-size: 18px; color: var(--bc-muted); }
+
+  .workflow-steps {
+    display: flex;
+    gap: 0;
+    position: relative;
+  }
+  .workflow-steps::before {
+    content: '';
+    position: absolute;
+    top: 60px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--bc-border), var(--bc-green), var(--bc-border), transparent);
+  }
+
+  .workflow-step {
+    flex: 1;
+    text-align: center;
+    padding: 0 20px;
+    position: relative;
+  }
+
+  .step-circle {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--bc-card);
+    border: 2px solid var(--bc-border);
+    display: flex; align-items: center; justify-content: center;
+    margin: 32px auto 28px;
+    position: relative;
+    z-index: 1;
+    color: var(--bc-green);
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .workflow-step:hover .step-circle { border-color: var(--bc-green); background: rgba(0,159,227,0.1); }
+
+  .step-num {
+    position: absolute;
+    top: -10px; right: -10px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--bc-green);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .workflow-step h4 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px; color: var(--bc-white); margin-bottom: 8px; }
+  .workflow-step p { font-size: 13px; color: var(--bc-muted); line-height: 1.55; }
+
+  .workflow-value-tag {
+    display: inline-block;
+    margin-top: 12px;
+    background: rgba(0,159,227,0.1);
+    border: 1px solid rgba(0,159,227,0.2);
+    border-radius: 3px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    color: var(--bc-green);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* ── AI ── */
+  #ai-section {
+    background: var(--bc-dark2);
+    border-top: 1px solid var(--bc-border);
+  }
+
+  .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+  .ai-text h2 { font-size: clamp(34px, 4vw, 52px); font-weight: 800; margin-bottom: 24px; line-height: 1.1; }
+  .ai-text p { font-size: 17px; color: var(--bc-muted); line-height: 1.7; margin-bottom: 40px; }
+
+  .ai-pills { display: flex; flex-direction: column; gap: 2px; }
+  .ai-pill {
+    background: var(--bc-card);
+    border-left: 2px solid var(--bc-green);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .ai-pill .material-icons-round { color: var(--bc-green); font-size: 20px; flex-shrink: 0; }
+  .ai-pill-text h5 { font-size: 14px; font-weight: 700; color: var(--bc-white); margin-bottom: 2px; }
+  .ai-pill-text p { font-size: 12px; color: var(--bc-muted); }
+
+  .ai-visual {
+    background: var(--bc-card);
+    border: 1px solid var(--bc-border);
+    border-radius: 8px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .ai-visual-label { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: var(--bc-muted); text-transform: none; letter-spacing: 0; }
+  .ai-metric-row { display: flex; gap: 12px; }
+  .ai-metric {
+    flex: 1;
+    background: var(--bc-dark);
+    border: 1px solid var(--bc-border);
+    border-radius: 6px;
+    padding: 20px 18px;
+  }
+  .ai-metric .mn { font-family: 'Inter', sans-serif; font-size: 36px; font-weight: 800; color: var(--bc-green); line-height: 1; }
+  .ai-metric .md { font-size: 12px; color: var(--bc-muted); margin-top: 4px; text-transform: none; letter-spacing: 0; }
+
+  /* ── SUPPORT ── */
+  #support {
+    background: var(--bc-dark);
+    border-top: 1px solid var(--bc-border);
+  }
+
+  .support-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+  .support-img {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .support-img img { width: 100%; height: 420px; object-fit: cover; display: block; filter: brightness(0.8) saturate(0.8); }
+
+  .support-text h2 { font-size: clamp(34px, 4vw, 52px); font-weight: 800; margin-bottom: 24px; }
+  .support-text p { font-size: 17px; color: var(--bc-muted); line-height: 1.7; margin-bottom: 40px; }
+
+  .support-items { display: flex; flex-direction: column; gap: 2px; }
+  .support-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    background: var(--bc-card);
+    padding: 20px 24px;
+  }
+  .support-item .material-icons-round { color: var(--bc-green); font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .support-item h5 { font-size: 15px; font-weight: 700; color: var(--bc-white); margin-bottom: 3px; }
+  .support-item p { font-size: 13px; color: var(--bc-muted); }
+
+  /* ── TESTIMONIALS ── */
+  #social {
+    background: var(--bc-dark2);
+    border-top: 1px solid var(--bc-border);
+  }
+
+  .social-header { text-align: center; max-width: 600px; margin: 0 auto 72px; }
+  .social-header h2 { font-size: clamp(36px, 4.2vw, 58px); font-weight: 900; margin-bottom: 20px; letter-spacing: -0.025em; }
+
+  .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 64px; }
+
+  .testimonial {
+    background: var(--bc-card);
+    padding: 40px 36px;
+    border-top: 2px solid var(--bc-border);
+    transition: border-top-color 0.25s;
+  }
+  .testimonial:hover { border-top-color: var(--bc-green); }
+
+  .test-stars { color: var(--bc-green); font-size: 14px; margin-bottom: 20px; letter-spacing: 2px; }
+  .test-quote { font-size: 15px; color: var(--bc-light); line-height: 1.7; margin-bottom: 24px; font-style: italic; opacity: 0.9; }
+  .test-meta h5 { font-size: 14px; font-weight: 700; color: var(--bc-white); }
+  .test-meta p { font-size: 12px; color: var(--bc-muted); }
+
+  .logo-bar {
+    display: flex; align-items: center; justify-content: center;
+    gap: 48px; flex-wrap: wrap;
+    padding: 40px 0;
+    border-top: 1px solid var(--bc-border);
+    border-bottom: 1px solid var(--bc-border);
+  }
+  .logo-bar img { height: 28px; width: auto; filter: grayscale(1) brightness(0.5); transition: filter 0.2s; }
+  .logo-bar img:hover { filter: grayscale(0) brightness(1); }
+
+  /* ── PRICING ── */
+  #pricing {
+    background: var(--bc-dark);
+    border-top: 1px solid var(--bc-border);
+  }
+
+  .pricing-header { text-align: center; max-width: 640px; margin: 0 auto 72px; }
+  .pricing-header h2 { font-size: clamp(36px, 4.2vw, 58px); font-weight: 900; margin-bottom: 20px; letter-spacing: -0.025em; }
+  .pricing-header p { font-size: 18px; color: var(--bc-muted); }
+
+  .pricing-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 64px; }
+
+  .pricing-card {
+    background: var(--bc-card);
+    padding: 40px 36px;
+    position: relative;
+    border-top: 2px solid var(--bc-border);
+  }
+  .pricing-card.featured {
+    background: linear-gradient(160deg, rgba(0,159,227,0.07) 0%, var(--bc-card) 60%);
+    border-top-color: var(--bc-green);
+  }
+
+  .pricing-badge {
+    position: absolute;
+    top: -1px; right: 28px;
+    background: var(--bc-green);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+    padding: 4px 12px;
+    border-radius: 0 0 4px 4px;
+  }
+
+  .pricing-card h3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 22px; color: var(--bc-white); margin-bottom: 8px; }
+  .pricing-card .price { font-family: 'Inter', sans-serif; font-size: 56px; font-weight: 800; color: var(--bc-green); line-height: 1; margin: 20px 0 4px; }
+  .pricing-card .price-unit { font-size: 13px; color: var(--bc-muted); margin-bottom: 28px; }
+  .pricing-card .price-desc { font-size: 14px; color: var(--bc-muted); margin-bottom: 32px; line-height: 1.55; }
+
+  .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .pricing-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--bc-muted); }
+  .pricing-features li .material-icons-round { font-size: 16px; color: var(--bc-green); flex-shrink: 0; margin-top: 2px; }
+
+  /* ── CTA ── */
+  #cta {
+    background: var(--bc-dark2);
+    border-top: 1px solid var(--bc-border);
+  }
+
+  .cta-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .cta-left h2 { font-size: clamp(36px, 4.5vw, 60px); font-weight: 800; line-height: 1.1; margin-bottom: 24px; }
+  .cta-left h2 span { color: var(--bc-green); }
+  .cta-left p { font-size: 18px; color: var(--bc-muted); line-height: 1.65; }
+
+  .cta-right {
+    background: var(--bc-card);
+    border: 1px solid var(--bc-border);
+    border-radius: 8px;
+    padding: 48px;
+  }
+  .cta-right h3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 22px; color: var(--bc-white); margin-bottom: 8px; }
+  .cta-right p { font-size: 14px; color: var(--bc-muted); margin-bottom: 32px; }
+
+  .cta-option {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--bc-border);
+  }
+  .cta-option:last-of-type { border-bottom: none; margin-bottom: 24px; }
+  .cta-option .material-icons-round { color: var(--bc-green); font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .cta-option h5 { font-size: 14px; font-weight: 700; color: var(--bc-white); margin-bottom: 2px; }
+  .cta-option p { font-size: 12px; color: var(--bc-muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bc-dark);
+    border-top: 1px solid var(--bc-border);
+    text-align: center;
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer img { height: 28px; }
+  footer p { font-size: 12px; color: var(--bc-mid); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.22s; }
+  .delay-3 { animation-delay: 0.36s; }
+  .delay-4 { animation-delay: 0.5s; }
+  .delay-5 { animation-delay: 0.65s; }
+
+  @keyframes countUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .hero-grid, .pain-grid, .platform-grid, .ai-grid, .support-grid, .cta-inner, .platform-value-row { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .platform-grid { grid-template-columns: repeat(3, 1fr); }
+    .pricing-cards, .testimonials { grid-template-columns: 1fr; }
+    .pain-grid { grid-template-columns: 1fr 1fr; }
+    .nav { padding: 16px 24px; }
+    .section-inner { padding: 72px 24px; }
+    .workflow-steps { flex-direction: column; }
+    .workflow-steps::before { display: none; }
+    .outcomes-grid { grid-template-columns: 1fr; }
+    .outcomes-cta-strip { flex-direction: column; text-align: center; }
+    .logo-bar { gap: 24px; }
+  }
+
+  @media (max-width: 640px) {
+    .pain-grid { grid-template-columns: 1fr; }
+    .platform-grid { grid-template-columns: 1fr 1fr; }
+    .hero-stat-row { gap: 24px; flex-wrap: wrap; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <img src="https://cdn.prod.website-files.com/652cf498161daabd6b40ba1b/67ab22b71528288604bc325e_BigChange-Horz_RGB_EnergyBlue.svg" alt="BigChange">
+  <a href="#cta" class="nav-cta">Get a demo</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="section-inner">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-kicker fade-up delay-1">One platform. Every workflow. The entire business.</p>
+        <h1 class="fade-up delay-2">
+          Stop losing<br>
+          money to <span class="accent">chaos.</span><br>
+          Start <span class="accent2">growing.</span>
+        </h1>
+        <p class="hero-sub fade-up delay-3">
+          Every disconnected tool your team uses is costing you money. BigChange replaces all of them 
+          with one AI-powered platform — built for field service businesses that are done 
+          losing revenue to admin, chaos, and systems that don't talk to each other.
+        </p>
+        <div class="hero-actions fade-up delay-4">
+          <a href="#cta" class="btn-primary">See it in action →</a>
+          <a href="#outcomes" class="btn-ghost">See the numbers</a>
+        </div>
+
+        <div class="hero-stat-row fade-up delay-5">
+          <div class="hero-stat">
+            <div class="num">2,500+</div>
+            <div class="desc">Businesses Powered</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">70+</div>
+            <div class="desc">NPS Score</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">60+</div>
+            <div class="desc">Industries Served</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual fade-up delay-3">
+        <div class="hero-img-wrap">
+          <img src="https://cdn.prod.website-files.com/652e90c1583f67a8de233f2d/66fffb029cf97c77b995fee2_66ba1e7098fc500643c5daac_1200pix_bigchange_lanes_04043.jpeg" alt="Field operatives using BigChange">
+          <div class="hero-img-overlay"></div>
+        </div>
+        <div class="hero-badge">
+          <div class="icon-wrap">
+            <span class="material-icons-round">trending_up</span>
+          </div>
+          <div>
+            <div class="badge-num">+3</div>
+            <div class="badge-desc">Extra jobs per operative/month</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section id="pain">
+  <div class="section-inner">
+    <div class="pain-header reveal">
+      <span class="label">The problem</span>
+      <h2>A day in the life<br>without BigChange.</h2>
+      <p>Every step of every job runs through a different tool — or no tool at all. This is what that costs you.</p>
+    </div>
+
+    <div class="pain-grid">
+      <div class="pain-item reveal">
+        <span class="material-icons-round pain-icon">schedule</span>
+        <h3>Scheduling chaos — every morning</h3>
+        <p>Manual scheduling means planners spend hours juggling spreadsheets and phone calls instead of deploying the right engineer at the right time — costing you jobs and overtime.</p>
+        <div class="pain-solve"><span class="material-icons-round">bolt</span> Intelligent scheduling & live dispatch</div>
+      </div>
+
+      <div class="pain-item reveal">
+        <span class="material-icons-round pain-icon">receipt_long</span>
+        <h3>Invoices go out days — or weeks — after the job</h3>
+        <p>Paper job sheets get lost. Signatures are missing. Finance can't raise an invoice without chasing the engineer. Cash flow suffers while admin spirals.</p>
+        <div class="pain-solve"><span class="material-icons-round">bolt</span> Digital job sheets → instant invoicing</div>
+      </div>
+
+      <div class="pain-item reveal">
+        <span class="material-icons-round pain-icon">visibility_off</span>
+        <h3>Field-office disconnect. Customers calling for updates nobody can give.</h3>
+        <p>Without live tracking you can't answer "where is the engineer?" You can't prove SLA compliance. You can't stop fuel waste or unauthorised vehicle use.</p>
+        <div class="pain-solve"><span class="material-icons-round">bolt</span> Real-time fleet & team visibility</div>
+      </div>
+
+      <div class="pain-item reveal">
+        <span class="material-icons-round pain-icon">sync_alt</span>
+        <h3>Wrong parts, wrong place. Return trips eating hours.</h3>
+        <p>CRM in one place, job management in another, finance in a third. Data gets re-entered, mistakes multiply, and nobody has a single source of truth.</p>
+        <div class="pain-solve"><span class="material-icons-round">bolt</span> One unified platform — no silos</div>
+      </div>
+
+      <div class="pain-item reveal">
+        <span class="material-icons-round pain-icon">verified_user</span>
+        <h3>Paper job sheets. Lost, smudged, or left in the van.</h3>
+        <p>Risk assessments, method statements, COSHH records — managing these manually creates exposure and headaches. One audit can derail an entire team.</p>
+        <div class="pain-solve"><span class="material-icons-round">bolt</span> Digital compliance built into every job</div>
+      </div>
+
+      <div class="pain-item reveal">
+        <span class="material-icons-round pain-icon">signal_cellular_alt</span>
+        <h3>More contracts. More overhead. Zero extra profit.</h3>
+        <p>Every new contract means more people, more spreadsheets, more complexity. You're not scaling — you're just getting bigger.</p>
+        <div class="pain-solve"><span class="material-icons-round">bolt</span> Scale without scaling your overhead</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section id="outcomes">
+  <div class="section-inner">
+    <div class="outcomes-header reveal">
+      <span class="label">The real cost</span>
+      <h2>Thin margins aren't<br>a skill problem.</h2>
+      <p>This is not a reflection of skill. It is a failure of systems. When you eliminate the waste, profit appears — every time.</p>
+    </div>
+
+    <!-- Simpro-style cost callout -->
+    <div class="cost-callout reveal">
+      <div class="cost-stat">
+        <div class="cost-num">35</div>
+        <div class="cost-desc">Disconnected tasks<br>to complete one job</div>
+      </div>
+      <div class="cost-stat">
+        <div class="cost-num">18.5</div>
+        <div class="cost-desc">Admin hours lost<br>per engineer per week</div>
+      </div>
+      <div class="cost-stat highlight">
+        <div class="cost-num">£150K</div>
+        <div class="cost-desc">Lost per year by<br>a £1M field service business</div>
+      </div>
+      <div class="cost-stat">
+        <div class="cost-num">60–90</div>
+        <div class="cost-desc">Days average invoice-<br>to-payment without BigChange</div>
+      </div>
+    </div>
+
+    <div class="outcomes-grid">
+      <div class="outcome-card reveal">
+        <div class="outcome-num">+3</div>
+        <div class="outcome-body">
+          <div class="outcome-title">Extra Jobs Completed Per Field Operative, Per Month</div>
+          <div class="outcome-desc">Smarter scheduling, optimised routing, and less time on admin means your team can take on more work without adding headcount. At average job values, that's meaningful revenue growth per engineer — every month.</div>
+          <div class="outcome-source">Based on BigChange customer data</div>
+        </div>
+      </div>
+
+      <div class="outcome-card reveal">
+        <div class="outcome-num">-20%</div>
+        <div class="outcome-body">
+          <div class="outcome-title">Reduction in Fuel Costs</div>
+          <div class="outcome-desc">Live tracking and intelligent route optimisation dramatically cut wasted mileage. Combine that with CANbus data to monitor fuel consumption and driver behaviour — and the savings stack up fast.</div>
+          <div class="outcome-source">Based on BigChange customer data</div>
+        </div>
+      </div>
+
+      <div class="outcome-card reveal">
+        <div class="outcome-num">-70%</div>
+        <div class="outcome-body">
+          <div class="outcome-title">Reduction in Admin Time</div>
+          <div class="outcome-desc">When job sheets are digital, signatures are captured on-site, and data flows directly into your invoicing — your back office team stops drowning in paperwork and starts adding real value.</div>
+          <div class="outcome-source">Based on BigChange customer data</div>
+        </div>
+      </div>
+
+      <div class="outcome-card reveal">
+        <div class="outcome-num">2×</div>
+        <div class="outcome-body">
+          <div class="outcome-title">Faster Invoice-to-Payment Cycle</div>
+          <div class="outcome-desc">Invoice on completion, not days later. With BigChange Payments powered by Stripe, your team can take card payments on-site at a rate of just 1.7% + 20p. Less chasing, better cash flow.</div>
+          <div class="outcome-source">Based on BigChange Payments data</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="outcomes-cta-strip reveal">
+      <div>
+        <h3>See what this means for your business</h3>
+        <p>Every operator is different. Let's run through your numbers together and show you the ROI BigChange delivers for businesses like yours.</p>
+      </div>
+      <a href="#cta" class="btn-primary">Get my ROI estimate</a>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM -->
+<section id="platform">
+  <div class="section-inner">
+    <div class="platform-header reveal">
+      <span class="label">The solution</span>
+      <h2>One platform.<br>Every workflow.<br>The entire business.</h2>
+      <p>BigChange replaces every disconnected tool with a single platform — built from the ground up for how field service businesses actually operate. Quote. Schedule. Dispatch. Invoice. Pay. Repeat.</p>
+    </div>
+
+    <div class="platform-grid">
+      <div class="platform-tile reveal">
+        <div class="tile-icon"><span class="material-icons-round">corporate_fare</span></div>
+        <h4>CRM & Back Office</h4>
+        <p>Manage every customer, contract, quote, and invoice from a single hub. No more switching between systems.</p>
+      </div>
+      <div class="platform-tile reveal">
+        <div class="tile-icon"><span class="material-icons-round">event_available</span></div>
+        <h4>Intelligent Job Scheduling</h4>
+        <p>Plan, dispatch, and optimise jobs with full visibility of skills, availability, and geography. Get more out of every day.</p>
+      </div>
+      <div class="platform-tile reveal">
+        <div class="tile-icon"><span class="material-icons-round">local_shipping</span></div>
+        <h4>Vehicle & Asset Tracking</h4>
+        <p>Live location, fuel data, driver behaviour, and asset management — all connected to the job in real time.</p>
+      </div>
+      <div class="platform-tile reveal">
+        <div class="tile-icon"><span class="material-icons-round">phone_iphone</span></div>
+        <h4>Mobile Operative App</h4>
+        <p>Digital job sheets, photos, eSignatures, compliance forms, timesheets, and stock — all in their pocket.</p>
+      </div>
+      <div class="platform-tile reveal">
+        <div class="tile-icon"><span class="material-icons-round">hub</span></div>
+        <h4>Network & Subcontractors</h4>
+        <p>Extend your capacity without losing control. Collaborate with partners and subcontractors through the BigChange Network.</p>
+      </div>
+    </div>
+
+
+    <!-- Simpro-style comparison table -->
+    <div class="comparison-table reveal">
+      <div class="comp-header">
+        <span class="label">One platform vs. 8+ disconnected tools</span>
+        <p>Most field service businesses stitch together 5–8 separate tools to run what BigChange handles in one.</p>
+      </div>
+      <table class="comp-grid">
+        <thead>
+          <tr>
+            <th>Workflow</th>
+            <th class="without">Without BigChange</th>
+            <th class="with">With BigChange</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Scheduling & Dispatch</td><td class="without">Scheduling app + whiteboard + phone calls + GPS app</td><td class="with">✓ BigChange</td></tr>
+          <tr><td>Quoting & Estimating</td><td class="without">Excel + email + PDF builder + price lists</td><td class="with">✓ BigChange</td></tr>
+          <tr><td>Invoicing & Payments</td><td class="without">Xero/Sage + Stripe + manual email chasing</td><td class="with">✓ BigChange</td></tr>
+          <tr><td>Field Operations</td><td class="without">Paper forms + WhatsApp + separate work order app</td><td class="with">✓ BigChange</td></tr>
+          <tr><td>Vehicle & Asset Tracking</td><td class="without">Separate telematics + spreadsheet + phone</td><td class="with">✓ BigChange</td></tr>
+          <tr><td>Safety & Compliance</td><td class="without">Paper certificates + Word docs + manual filing</td><td class="with">✓ BigChange</td></tr>
+          <tr><td>Customer Engagement</td><td class="without">Email + separate CRM + manual follow-up</td><td class="with">✓ BigChange</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="3" class="comp-footer">Average field service business: <strong>8+ tools → 8+ logins → 8+ monthly fees → zero integration</strong> &nbsp;|&nbsp; BigChange: <strong style="color:var(--bc-green)">1 platform, 1 login, everything connected</strong></td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="platform-value-row">
+      <div class="platform-value-block reveal">
+        <h3>What this means for your back office</h3>
+        <ul class="val-list">
+          <li><span class="material-icons-round">check_circle</span>One place to manage all customer and contract data — no duplication</li>
+          <li><span class="material-icons-round">check_circle</span>Automated quote-to-invoice workflows eliminate manual handoffs</li>
+          <li><span class="material-icons-round">check_circle</span>Real-time job status visible to office and customers alike</li>
+          <li><span class="material-icons-round">check_circle</span>Connects seamlessly to Xero, Sage 50 & QuickBooks</li>
+          <li><span class="material-icons-round">check_circle</span>Full business intelligence dashboard — see what's working and what isn't</li>
+        </ul>
+      </div>
+      <div class="platform-value-block reveal">
+        <h3>What this means for your field teams</h3>
+        <ul class="val-list">
+          <li><span class="material-icons-round">check_circle</span>All job info available on their device — no paper, no phone calls back to base</li>
+          <li><span class="material-icons-round">check_circle</span>Digital risk assessments, COSHH, and compliance forms — always audit-ready</li>
+          <li><span class="material-icons-round">check_circle</span>Capture photos, eSignatures, and customer satisfaction on completion</li>
+          <li><span class="material-icons-round">check_circle</span>Timesheets and expenses logged automatically — no lost claims</li>
+          <li><span class="material-icons-round">check_circle</span>Works offline — no signal? No problem.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKFLOW -->
+<section id="workflow">
+  <div class="section-inner">
+    <div class="workflow-header reveal">
+      <span class="label">How it works</span>
+      <h2>The full quote-to-cash workflow.</h2>
+      <p>Every step of your business, connected in one system. No handoffs. No delays. No chasing.</p>
+    </div>
+
+    <div class="workflow-steps">
+      <div class="workflow-step reveal">
+        <div class="step-circle"><span class="material-icons-round">call</span><span class="step-num">1</span></div>
+        <h4>Customer Enquiry</h4>
+        <p>Log the lead in CRM. Create a quote in minutes. Send it digitally for e-approval.</p>
+        <span class="workflow-value-tag">No lost leads</span>
+      </div>
+      <div class="workflow-step reveal">
+        <div class="step-circle"><span class="material-icons-round">event_available</span><span class="step-num">2</span></div>
+        <h4>Smart Scheduling</h4>
+        <p>Assign the right engineer — right skills, nearest location, available window. Instantly.</p>
+        <span class="workflow-value-tag">+3 jobs/month</span>
+      </div>
+      <div class="workflow-step reveal">
+        <div class="step-circle"><span class="material-icons-round">local_shipping</span><span class="step-num">3</span></div>
+        <h4>Live Deployment</h4>
+        <p>Track every vehicle in real time. Push live ETAs to customers. Prove SLA compliance.</p>
+        <span class="workflow-value-tag">-20% fuel cost</span>
+      </div>
+      <div class="workflow-step reveal">
+        <div class="step-circle"><span class="material-icons-round">phone_iphone</span><span class="step-num">4</span></div>
+        <h4>Job Completion</h4>
+        <p>Digital job sheet. Photos. eSignature. Compliance forms. All captured on-site, instantly.</p>
+        <span class="workflow-value-tag">-70% admin time</span>
+      </div>
+      <div class="workflow-step reveal">
+        <div class="step-circle"><span class="material-icons-round">payments</span><span class="step-num">5</span></div>
+        <h4>Invoice & Get Paid</h4>
+        <p>Auto-generate the invoice on job close. Take payment on-site or send for online payment.</p>
+        <span class="workflow-value-tag">2× faster payment</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI -->
+<section id="ai-section">
+  <div class="section-inner">
+    <div class="ai-grid">
+      <div class="ai-text reveal">
+        <span class="label">Advanced AI — built in</span>
+        <h2>AI embedded<br>in every workflow.</h2>
+        <p>Not bolted on. Not a chatbot. AI is the intelligent core of the BigChange platform — making scheduling smarter, documentation automatic, and profitability visible in real time. Built for field service businesses that are ready to compete differently.</p>
+        <div class="ai-pills">
+          <div class="ai-pill">
+            <span class="material-icons-round">camera</span>
+            <div class="ai-pill-text">
+              <h5>AI Dual-Facing Dashcam</h5>
+              <p>Detect unsafe driving automatically, upload incident clips, protect your insurance position.</p>
+            </div>
+          </div>
+          <div class="ai-pill">
+            <span class="material-icons-round">route</span>
+            <div class="ai-pill-text">
+              <h5>Intelligent Route Optimisation</h5>
+              <p>AI-powered scheduling that learns your operation and maximises engineer utilisation.</p>
+            </div>
+          </div>
+          <div class="ai-pill">
+            <span class="material-icons-round">insights</span>
+            <div class="ai-pill-text">
+              <h5>Proactive Business Intelligence</h5>
+              <p>Surface issues before they become problems — missed SLAs, underperforming routes, revenue leakage.</p>
+            </div>
+          </div>
+          <div class="ai-pill">
+            <span class="material-icons-round">psychology</span>
+            <div class="ai-pill-text">
+              <h5>Automated Workflow Triggers</h5>
+              <p>Rules-based automation handles routine tasks so your team focuses on what matters.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-visual reveal">
+        <div class="ai-visual-label">Live Platform Metrics — Customer Average</div>
+        <div class="ai-metric-row">
+          <div class="ai-metric">
+            <div class="mn">94%</div>
+            <div class="md">First-time fix rate improvement</div>
+          </div>
+          <div class="ai-metric">
+            <div class="mn">-20%</div>
+            <div class="md">Fuel & mileage reduction</div>
+          </div>
+        </div>
+        <div class="ai-metric-row">
+          <div class="ai-metric">
+            <div class="mn">3×</div>
+            <div class="md">Faster job completion paperwork</div>
+          </div>
+          <div class="ai-metric">
+            <div class="mn">+37%</div>
+            <div class="md">Revenue per engineer growth</div>
+          </div>
+        </div>
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--bc-border);">
+          <div class="ai-visual-label" style="margin-bottom: 12px;">Accounting Integrations</div>
+          <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+            <img src="https://images.icon-icons.com/2699/PNG/512/xero_logo_icon_167949.png" style="height: 28px; filter: brightness(0.7); transition: filter 0.2s;" onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0.7)'">
+            <img src="https://www.swiftcloud.co.uk/wp-content/uploads/2025/07/Sage_Fiddy-8-scaled.png" style="height: 28px; filter: brightness(0.7); transition: filter 0.2s;" onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0.7)'">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Intuit_QuickBooks_logo.png" style="height: 28px; filter: brightness(0.7); transition: filter 0.2s;" onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0.7)'">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section id="support">
+  <div class="section-inner">
+    <div class="support-grid">
+      <div class="support-img reveal">
+        <img src="https://iili.io/KErc8eR.md.png" alt="BigChange UK Support Team">
+      </div>
+      <div class="support-text reveal">
+        <span class="label">The people behind the platform</span>
+        <h2>Real people.<br>Real support.<br>Right here in the UK.</h2>
+        <p>When you need help, you're not talking to a chatbot or an offshore call centre. You're speaking with a BigChange expert in Leeds who understands your business and is invested in your success.</p>
+        <div class="support-items">
+          <div class="support-item">
+            <span class="material-icons-round">support_agent</span>
+            <div>
+              <h5>24/7 UK-Based Support</h5>
+              <p>Real humans, in Leeds, around the clock. Phone, email, or live chat — you'll never be left waiting.</p>
+            </div>
+          </div>
+          <div class="support-item">
+            <span class="material-icons-round">school</span>
+            <div>
+              <h5>BigChange University</h5>
+              <p>Structured learning paths take your team from onboarded to expert. Self-paced, certified, and always available.</p>
+            </div>
+          </div>
+          <div class="support-item">
+            <span class="material-icons-round">handshake</span>
+            <div>
+              <h5>Dedicated Customer Success</h5>
+              <p>Your Customer Success manager proactively reviews your account, spots opportunities, and helps you extract more value — every quarter.</p>
+            </div>
+          </div>
+          <div class="support-item">
+            <span class="material-icons-round">groups</span>
+            <div>
+              <h5>BigChange Community</h5>
+              <p>Exclusive workshops at our Leeds HQ. Connect with 2,500+ businesses, share what works, and learn from the best in your industry.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section id="social">
+  <div class="section-inner">
+    <div class="social-header reveal">
+      <span class="label">The ROI</span>
+      <h2>Real results.<br>Real customers.</h2>
+    </div>
+
+    <div class="testimonials">
+      <div class="testimonial reveal">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote">"Since implementing BigChange, we've seen a significant increase in the number of jobs our engineers complete each week. The scheduling is just so much smarter. We couldn't go back."</p>
+        <div class="test-meta">
+          <h5>Operations Director</h5>
+          <p>National FM Provider, 200+ Engineers</p>
+        </div>
+      </div>
+
+      <div class="testimonial reveal">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote">"Our invoicing cycle went from 5 days to same-day. The cash flow impact alone paid for BigChange in the first month. The admin time we've got back is extraordinary."</p>
+        <div class="test-meta">
+          <h5>Finance Director</h5>
+          <p>Electrical Contractor, 80 Vehicles</p>
+        </div>
+      </div>
+
+      <div class="testimonial reveal">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-quote">"We scaled from 40 to 120 engineers without adding a single person to the back office. BigChange is the reason we could grow that fast without it becoming chaos."</p>
+        <div class="test-meta">
+          <h5>Managing Director</h5>
+          <p>Plumbing & Heating Business</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="logo-bar reveal">
+      <span class="inline-logo" title="Algeco" aria-label="Algeco"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" height="32">
+  <rect width="120" height="40" fill="none"/>
+  <text x="8" y="28" font-family="Arial,sans-serif" font-weight="900" font-size="22" fill="#003B71" letter-spacing="-0.5">algeco</text>
+</svg></span>
+      <span class="inline-logo" title="Pinnacle" aria-label="Pinnacle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 40" height="32">
+  <rect width="140" height="40" fill="none"/>
+  <text x="4" y="26" font-family="Arial,sans-serif" font-weight="900" font-size="20" fill="#C8102E" letter-spacing="1">PINNACLE</text>
+  <text x="4" y="36" font-family="Arial,sans-serif" font-size="7" fill="#555" letter-spacing="0.5">FACILITIES MANAGEMENT</text>
+</svg></span>
+      <span class="inline-logo" title="AFI Uplift" aria-label="AFI Uplift"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" height="32">
+  <rect width="120" height="40" fill="none"/>
+  <rect x="0" y="4" width="44" height="32" rx="3" fill="#FF6600"/>
+  <text x="4" y="26" font-family="Arial,sans-serif" font-weight="900" font-size="20" fill="#fff">AFI</text>
+  <text x="52" y="20" font-family="Arial,sans-serif" font-weight="700" font-size="11" fill="#FF6600">UPLIFT</text>
+  <text x="52" y="32" font-family="Arial,sans-serif" font-size="8" fill="#777">Powered Access</text>
+</svg></span>
+      <span class="inline-logo" title="Balloo Hire" aria-label="Balloo Hire"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 40" height="32">
+  <rect width="130" height="40" fill="none"/>
+  <text x="4" y="26" font-family="Arial,sans-serif" font-weight="900" font-size="19" fill="#005B8E" letter-spacing="0.3">BALLOO HIRE</text>
+  <rect x="4" y="30" width="100" height="2" fill="#F7A800"/>
+</svg></span>
+      <span class="inline-logo" title="Sunbelt Rentals" aria-label="Sunbelt Rentals"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 40" height="32">
+  <rect width="150" height="40" fill="none"/>
+  <rect x="0" y="0" width="150" height="40" rx="3" fill="#F7A800"/>
+  <text x="8" y="16" font-family="Arial,sans-serif" font-weight="900" font-size="10" fill="#1a1a1a" letter-spacing="0.5">SUNBELT</text>
+  <text x="8" y="30" font-family="Arial,sans-serif" font-weight="900" font-size="10" fill="#1a1a1a" letter-spacing="0.5">RENTALS</text>
+</svg></span>
+      <span class="inline-logo" title="Greenspark" aria-label="Greenspark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 40" height="32">
+  <rect width="140" height="40" fill="none"/>
+  <circle cx="16" cy="20" r="12" fill="#2E7D32"/>
+  <text x="10" y="24" font-family="Arial,sans-serif" font-weight="900" font-size="11" fill="#fff">G</text>
+  <text x="34" y="24" font-family="Arial,sans-serif" font-weight="700" font-size="14" fill="#2E7D32">greenspark</text>
+</svg></span>
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 48px;" class="reveal">
+      <span class="inline-logo award-logo" title="Queen's Award" aria-label="Queen's Award"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 56" height="48">
+  <rect width="160" height="56" rx="4" fill="#1a1300"/>
+  <rect x="0" y="0" width="160" height="4" rx="2" fill="#B8860B"/>
+  <polygon points="80,8 86,22 100,22 89,31 93,45 80,36 67,45 71,31 60,22 74,22" fill="#B8860B" opacity="0.9"/>
+  <text x="80" y="50" font-family="Arial,sans-serif" font-weight="700" font-size="7.5" fill="#D4A017" text-anchor="middle" letter-spacing="0.3">QUEEN&#39;S AWARD · INNOVATION</text>
+</svg></span>
+      <span class="inline-logo award-logo" title="Megabuyte" aria-label="Megabuyte"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 56" height="48">
+  <rect width="160" height="56" rx="4" fill="#180A24"/>
+  <rect x="0" y="0" width="160" height="4" rx="2" fill="#7C3AED"/>
+  <text x="80" y="22" font-family="Arial,sans-serif" font-weight="900" font-size="15" fill="#7C3AED" text-anchor="middle" letter-spacing="1">mega</text>
+  <text x="80" y="37" font-family="Arial,sans-serif" font-weight="900" font-size="15" fill="#A78BFA" text-anchor="middle" letter-spacing="1">buyte</text>
+  <text x="80" y="50" font-family="Arial,sans-serif" font-size="7" fill="#9CA3AF" text-anchor="middle" letter-spacing="0.5">QUOTED COMPANY AWARDS</text>
+</svg></span>
+      <span class="inline-logo award-logo" title="Tech Track 100" aria-label="Tech Track 100"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 56" height="48">
+  <rect width="160" height="56" rx="4" fill="#1a0000"/>
+  <rect x="0" y="0" width="160" height="4" rx="2" fill="#CC0000"/>
+  <text x="80" y="18" font-family="Georgia,serif" font-weight="700" font-size="8" fill="#CC0000" text-anchor="middle" letter-spacing="1">THE SUNDAY TIMES</text>
+  <text x="80" y="34" font-family="Arial,sans-serif" font-weight="900" font-size="14" fill="#fff" text-anchor="middle" letter-spacing="2">TECH TRACK</text>
+  <text x="80" y="50" font-family="Arial,sans-serif" font-weight="900" font-size="14" fill="#CC0000" text-anchor="middle" letter-spacing="3">100</text>
+</svg></span>
+      <span class="inline-logo award-logo" title="Financial Times" aria-label="Financial Times"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 56" height="48">
+  <rect width="160" height="56" rx="4" fill="#1a0000"/>
+  <rect x="0" y="0" width="160" height="4" rx="2" fill="#CC0000"/>
+  <text x="80" y="20" font-family="Georgia,serif" font-weight="700" font-size="22" fill="#CC0000" text-anchor="middle" letter-spacing="2">FT</text>
+  <text x="80" y="36" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#fff" text-anchor="middle" letter-spacing="1.5">EUROPE&#39;S FASTEST</text>
+  <text x="80" y="49" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#fff" text-anchor="middle" letter-spacing="1.5">GROWING COMPANIES</text>
+</svg></span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="pricing-header reveal">
+      <span class="label">Pricing</span>
+      <h2>One platform.<br>One login.<br>Everything connected.</h2>
+      <p>No hidden fees. No 8 separate tools, 8 logins, 8 monthly fees with zero integration. One platform that typically pays for itself within the first quarter.</p>
+    </div>
+
+    <div class="pricing-cards">
+      <div class="pricing-card reveal">
+        <h3>Back Office User</h3>
+        <div class="price">£79<span style="font-size:36px">.95</span></div>
+        <div class="price-unit">per user / per month</div>
+        <div class="price-desc">Full platform access for office-based staff managing the entire operation.</div>
+        <ul class="pricing-features">
+          <li><span class="material-icons-round">check_circle</span>CRM & Sales Pipeline</li>
+          <li><span class="material-icons-round">check_circle</span>Intelligent Job Scheduling</li>
+          <li><span class="material-icons-round">check_circle</span>Live Vehicle & Team Tracking</li>
+          <li><span class="material-icons-round">check_circle</span>Quoting, Invoicing & Financials</li>
+          <li><span class="material-icons-round">check_circle</span>Business Intelligence & Reporting</li>
+        </ul>
+      </div>
+
+      <div class="pricing-card featured reveal">
+        <div class="pricing-badge">Most Popular</div>
+        <h3>JobWatch App</h3>
+        <div class="price">£79<span style="font-size:36px">.95</span></div>
+        <div class="price-unit">per user / per month</div>
+        <div class="price-desc">The full mobile experience for field operatives on their own device — including vehicle tracking.</div>
+        <ul class="pricing-features">
+          <li><span class="material-icons-round">check_circle</span>Digital Workflows & Job Sheets</li>
+          <li><span class="material-icons-round">check_circle</span>Photos, eSignatures & Compliance</li>
+          <li><span class="material-icons-round">check_circle</span>Timesheets & Expenses</li>
+          <li><span class="material-icons-round">check_circle</span>Stock Management</li>
+          <li><span class="material-icons-round">check_circle</span>Free Vehicle Tracking Unit Included</li>
+        </ul>
+      </div>
+
+      <div class="pricing-card reveal">
+        <h3>JobWatch Plus</h3>
+        <div class="price">£99<span style="font-size:36px">.95</span></div>
+        <div class="price-unit">per user / per month</div>
+        <div class="price-desc">The complete hardware-plus-software bundle. Everything your field team needs, out of the box.</div>
+        <ul class="pricing-features">
+          <li><span class="material-icons-round">check_circle</span>Everything in JobWatch App</li>
+          <li><span class="material-icons-round">check_circle</span>Rugged Samsung Tablet</li>
+          <li><span class="material-icons-round">check_circle</span>Data SIM (500MB)</li>
+          <li><span class="material-icons-round">check_circle</span>Device Management Software</li>
+          <li><span class="material-icons-round">check_circle</span>In-Vehicle Driver Cradle & Warranty</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="outcomes-cta-strip reveal">
+      <div>
+        <h3>Recover the revenue you're losing today.</h3>
+        <p>The average field service business recovers 12–15% of lost revenue in the first 90 days on BigChange. Let's calculate what that means for yours.</p>
+      </div>
+      <a href="#cta" class="btn-primary">Talk to the team</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="cta-left reveal">
+      <h2>Let's build your<br><span>profit story.</span></h2>
+      <p>The trades keep our world running. BigChange builds the platform that makes sure you get paid properly for it.</p>
+
+      <div style="margin-top: 40px; display: flex; gap: 24px; flex-wrap: wrap;">
+        <div style="text-align: center;">
+          <div style="font-family: 'Inter', sans-serif; font-size: 48px; font-weight: 800; color: var(--bc-green); line-height: 1;">2,500+</div>
+          <div style="font-size: 13px; color: var(--bc-muted); text-transform: none; letter-spacing: 0;">Customers</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-family: 'Inter', sans-serif; font-size: 48px; font-weight: 800; color: var(--bc-green); line-height: 1;">70+</div>
+          <div style="font-size: 13px; color: var(--bc-muted); text-transform: none; letter-spacing: 0;">NPS Score</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-family: 'Inter', sans-serif; font-size: 48px; font-weight: 800; color: var(--bc-green); line-height: 1;">24/7</div>
+          <div style="font-size: 13px; color: var(--bc-muted); text-transform: none; letter-spacing: 0;">UK Support</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-right reveal">
+      <h3>Book a Free Demo</h3>
+      <p>See exactly how BigChange works for your type of business — with a live walk-through tailored to your operation.</p>
+
+      <div class="cta-option">
+        <span class="material-icons-round">calendar_month</span>
+        <div>
+          <h5>01 — Discovery call</h5>
+          <p>Share your workflows, challenges and goals. We listen first.</p>
+        </div>
+      </div>
+      <div class="cta-option">
+        <span class="material-icons-round">calculate</span>
+        <div>
+          <h5>02 — Custom ROI model</h5>
+          <p>We calculate your profit opportunity — with your numbers, not generic benchmarks.</p>
+        </div>
+      </div>
+      <div class="cta-option">
+        <span class="material-icons-round">handshake</span>
+        <div>
+          <h5>03 — Platform demo</h5>
+          <p>See BigChange solve YOUR workflows live. Not a generic walkthrough — your industry, your problems.</p>
+        </div>
+      </div>
+
+      <a href="https://www.bigchange.com/request-a-demo/" target="_blank" class="btn-primary" style="width: 100%; text-align: center; margin-top: 8px;">Book your free demo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="https://cdn.prod.website-files.com/652cf498161daabd6b40ba1b/67ab22b71528288604bc325e_BigChange-Horz_RGB_EnergyBlue.svg" alt="BigChange">
+  <p>Part of Simpro Group · 24/7 UK Support · ISO 27001 & ISO 9001 Certified · AWS-Powered Infrastructure</p>
+  <p style="font-size: 11px; color: var(--bc-border);">© 2025 BigChange. All rights reserved.</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, (entry.target.dataset.delay || 0) * 1000);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Stagger child reveals in grids
+  document.querySelectorAll('.pain-grid, .outcomes-grid, .platform-grid, .pricing-cards, .testimonials, .workflow-steps').forEach(grid => {
+    grid.querySelectorAll('.reveal').forEach((child, i) => {
+      child.style.transitionDelay = `${i * 0.08}s`;
+    });
+  });
+</script>
+</body>
+</html>
